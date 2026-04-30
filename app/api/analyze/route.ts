@@ -1,17 +1,22 @@
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
-  const body = await req.json();
-  const { url } = body;
+  const { url, transcript } = await req.json();
 
-  if (!url) {
+  if (!url || typeof url !== "string" || url.trim() === "") {
     return NextResponse.json(
-      { error: "Missing YouTube URL" },
+      { error: "Missing YouTube link" },
       { status: 400 }
     );
   }
 
-  // TEMP MOCK DATA (we will replace with AI later)
+  if (!transcript || typeof transcript !== "string" || transcript.trim() === "") {
+    return NextResponse.json(
+      { error: "Transcript is required" },
+      { status: 400 }
+    );
+  }
+
   const clips = [
     {
       start: "01:23",

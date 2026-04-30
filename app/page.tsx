@@ -16,6 +16,8 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
 
   async function handleGenerate() {
+    console.log("REQUEST:", { url, transcript });
+    
     setLoading(true);
 
     const res = await fetch("/api/analyze", {
@@ -23,10 +25,17 @@ export default function Home() {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ url })
+      body: JSON.stringify({ url, transcript })
     });
 
     const data = await res.json();
+
+    if (!res.ok) {
+      alert(data.error || "Request failed");
+      setLoading(false);
+      return;
+    }
+
     setClips(data.clips);
     setLoading(false);
   }
