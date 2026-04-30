@@ -9,16 +9,32 @@ type Clip = {
   hook: string;
 };
 
+function getMockTranscript(url: string) {
+  if (url.includes("test1")) {
+    return "Transcript A: The guest shares a surprising story about building momentum, taking risks, and finding the one clip that changes the whole conversation.";
+  }
+
+  if (url.includes("test2")) {
+    return "Transcript B: The host and guest debate a controversial idea, then land on a practical insight that would make a strong short-form hook.";
+  }
+
+  return "Default transcript: This podcast episode includes a compelling opening, an emotional turning point, and several concise moments that could become viral clips.";
+}
+
 export default function Home() {
   const [url, setUrl] = useState("");
-  const [transcript, setTranscript] = useState("");
   const [clips, setClips] = useState<Clip[]>([]);
   const [loading, setLoading] = useState(false);
+  const [loadingText, setLoadingText] = useState("");
 
   async function handleGenerate() {
-    console.log("REQUEST:", { url, transcript });
-    
     setLoading(true);
+    setLoadingText("Fetching transcript...");
+
+    await new Promise((resolve) => setTimeout(resolve, 300));
+
+    const transcript = getMockTranscript(url);
+    setLoadingText("Generating clips...");
 
     const res = await fetch("/api/analyze", {
       method: "POST",
@@ -33,11 +49,13 @@ export default function Home() {
     if (!res.ok) {
       alert(data.error || "Request failed");
       setLoading(false);
+      setLoadingText("");
       return;
     }
 
     setClips(data.clips);
     setLoading(false);
+    setLoadingText("");
   }
 
   return (
@@ -51,25 +69,11 @@ export default function Home() {
         style={{ padding: 10, width: 400, marginTop: 20 }}
       />
 
-      <textarea
-        value={transcript}
-        onChange={(e) => setTranscript(e.target.value)}
-        placeholder="Paste podcast transcript here..."
-        rows={10}
-        style={{
-          display: "block",
-          padding: 10,
-          width: 400,
-          marginTop: 10,
-          resize: "vertical"
-        }}
-      />
-
       <button
         onClick={handleGenerate}
         style={{ display: "block", marginTop: 10, padding: 10 }}
       >
-        {loading ? "Generating..." : "Generate Clips"}
+        {loading ? loadingText : "Generate Clips"}
       </button>
 
       <div style={{ marginTop: 30 }}>
