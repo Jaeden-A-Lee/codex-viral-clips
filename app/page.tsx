@@ -2,9 +2,17 @@
 
 import { useState } from "react";
 
+type Clip = {
+  start: string;
+  end: string;
+  reason: string;
+  hook: string;
+};
+
 export default function Home() {
   const [url, setUrl] = useState("");
-  const [clips, setClips] = useState<any[]>([]);
+  const [transcript, setTranscript] = useState("");
+  const [clips, setClips] = useState<Clip[]>([]);
   const [loading, setLoading] = useState(false);
 
   async function handleGenerate() {
@@ -32,6 +40,20 @@ export default function Home() {
         onChange={(e) => setUrl(e.target.value)}
         placeholder="Paste YouTube URL"
         style={{ padding: 10, width: 400, marginTop: 20 }}
+      />
+
+      <textarea
+        value={transcript}
+        onChange={(e) => setTranscript(e.target.value)}
+        placeholder="Paste podcast transcript here..."
+        rows={10}
+        style={{
+          display: "block",
+          padding: 10,
+          width: 400,
+          marginTop: 10,
+          resize: "vertical"
+        }}
       />
 
       <button
