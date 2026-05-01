@@ -22,7 +22,7 @@ export async function POST(req: Request) {
   const response = await openai.responses.create({
     model: "gpt-5.2",
     instructions:
-      "You find viral podcast moments. You MUST ONLY use timestamps provided. Never invent or estimate time. Use segment.start values exactly.",
+      "You identify the 3 most viral short-form clips from a podcast transcript. Return strictly valid JSON only. Use ONLY timestamps explicitly present in the provided transcript segments. Each clip must correspond to the exact segment where the quoted hook appears. Never estimate, interpolate, or shift timestamps earlier or later. If uncertain, choose the closest exact transcript segment timestamp. Prioritize timestamp precision over clip quality.",
     input: `
 Video URL: ${url}
 
