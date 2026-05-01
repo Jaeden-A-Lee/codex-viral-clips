@@ -1,36 +1,131 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Viral Clip Finder 🚀
 
-## Getting Started
+An AI-powered tool that analyzes YouTube podcast transcripts and finds the most viral short-form clip opportunities for TikTok, YouTube Shorts, and Instagram Reels.
 
-First, run the development server:
+Built for creators who want to turn long-form content into high-performing short clips instantly.
+
+---
+
+## What It Does
+
+Paste a YouTube video URL and Viral Clip Finder will:
+
+- Fetch the video transcript
+- Preserve real transcript timestamps
+- Analyze the conversation using OpenAI
+- Identify the **3 strongest viral clip moments**
+- Return:
+  - Accurate timestamps
+  - A compelling hook
+  - Why the moment is likely to perform well
+
+---
+
+## Why I Built It
+
+Content creators spend hours manually watching podcasts and interviews to find short-form clips worth posting.
+
+Viral Clip Finder automates that process by using AI to identify moments with:
+
+- Strong emotional hooks
+- Debate / controversy
+- Storytelling tension
+- Motivational insight
+- High engagement potential
+
+---
+
+## Tech Stack
+
+- **Next.js 16**
+- **React**
+- **TypeScript**
+- **OpenAI API**
+- **youtube-transcript**
+- **Turbopack**
+
+---
+
+## How It Works
+
+### 1. Transcript Extraction
+The app fetches transcript segments directly from YouTube.
+
+### 2. Timestamp Preservation
+Each transcript segment keeps its real timestamp.
+
+### 3. AI Analysis
+Timestamped transcript data is sent to OpenAI for analysis.
+
+### 4. Viral Clip Selection
+The model identifies the top 3 short-form moments based on virality potential.
+
+### 5. Output
+Users receive:
+
+- Start / end timestamp
+- Viral hook
+- Reasoning
+
+---
+
+## Running Locally
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Create a `.env.local` file:
+
+```env
+OPENAI_API_KEY=your_openai_api_key
+```
+
+Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## Example Use Cases
 
-To learn more about Next.js, take a look at the following resources:
+- Podcast clipping
+- Creator repurposing
+- Shorts generation
+- Social media content strategy
+- Highlight extraction
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Future Improvements
 
-## Deploy on Vercel
+- Direct clip export
+- More than 3 generated clips
+- Virality scoring
+- Downloadable timestamps
+- Auto-caption generation
+- TikTok / Shorts optimization suggestions
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Demo
+
+Paste a YouTube podcast URL → Generate clips → Instantly get timestamped viral moments.
+
+---
+
+## Built By
+
+Jaeden Lee
+
+Built for the Codex Creator Challenge
